@@ -8,9 +8,13 @@
 # General Public License version 3 as published by 
 # the Free Software Foundation.
 #
-
 class cdb {
   package{'cdb':
     ensure => installed
+  }
+  if ($::operatingsystem == 'CentOS') and (versioncmp($::operatingsystemmajrelease,'6') > 0) {
+    Package['cdb'] {
+      name => 'tinycdb'
+    }
   }
 }
